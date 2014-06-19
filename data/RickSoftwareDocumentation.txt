@@ -1,0 +1,52 @@
+# RICK Documentation
+
+## Configuration of the RICK
+
+This section provides detailed information about the configuration of the
+different components of the RICK. The target group of this sections are
+persons that need to setup and/or configure the RICK Infrastructure (e.g.
+Developers or OSGI Administrators).
+
+  * '''The [basic Setup](RickInstallation#Configuring_RICK)''' (see [Installation](RickInstallation))''':''' Explains the minimal configuration needed to run the RICK 
+  * '''[Rick Main Configuration](RickConfiguration):''' Provides detailed information about the options for the global configuration of the RICK 
+  * '''[Referenced Sites](ReferencedSiteConfiguration):''' Describes the necessary steps to link referenced sites with the RICK. 
+  * '''[Yards](YardConfiguration):''' Yards are the storage components of the RICK. The RICK can use several Yards and also provides different implementations based on different storage technologies. 
+    * '''[ClerezzaYard](ClerezzaYardConfiguration):''' A RDF Triple Store Yard implementation based on [http://incubator.apache.org/clerezza Clerezza]. SPARQL is used for queries. 
+    * '''[SolrYard](SolrYardConfiguration):''' A Yard Implementation based on the [http://lucene.apache.org/solr/ Solr] Search Server. 
+  * '''Local [Caches](CacheConfiguration):''' A cache is a wrapper over a Yard that allows to configure what information are cached locally. 
+  * '''Entity Import and [Representation Mappings](RepresentationMapping):''' When importing information from referenced sites one needs to filter, validate, align such information.
+
+## Architecture of the RICK
+
+This section describes the architecture of the RICK and all the main
+components. The target group for this section are developers that want to use
+the Java API of the RICK as well as developers that plan the extend the RICK
+(e.g. by providing there own implementation RICK services).
+
+  * '''[High Level View](RickArchitecture):''' This describes how to use the core component of RICK without going into to much details.
+  * '''The [Rick Model](RickDataModel):''' This explains the data model used by the RICK (and why there are no Entities defined in this data model ;)
+  * '''[Components of the Rick](ComponentsOfTheRick):''' This sections describes details of the components defined by RICK
+    * '''[Rick](ComponentRick):''' This component is the central access point for all information managed by the Rick.
+    * '''[ReferencedSiteManager](ComponentReferencedSiteManager):''' This manager component allows to work with all referenced sites via a central access point.
+    * '''[ReferencedSite](ComponentReferencedSite):''' This components is the local access point for a referenced site (an entity information source that is linked with the RICK)
+    * '''[EntityDereferencer](ComponentEntityDereferencer) and [EntitySearcher](ComponentEntitySearcher):''' Implementations of this interfaces are used by the [ReferencedSite](ComponentReferencedSite) to dereference entity information and to search for entities based on parsed [queries](RickQuery)
+    * '''[Yard](ComponentYard):''' This component is used to store all kind of information that is managed by the RICK or locally cached for referenced sites
+    * '''[Cache](ComponentCache):''' This component is implemented as a wrapper over [Yard](ComponentYard) but allows to define via [mappings](RepresentationMapping) to control what information are cached locally for entities loaded from the remote site.
+  * '''[Query API](RickQuery):''' In future RICK will define several different query types. This section will explain when and how to use the different query types.
+
+## [[RickRESTfullApi|RESTful Interface]] of the RICK
+
+This Section provides Information about the Web-Services API of the Rick and
+is intended for Developers that plan to use the RICK via its RESTful Services
+API.
+
+The RICK supports three Service Endpoints:
+
+  1. '''[SITES endpoint](RickRESTfullApi#SITES_Service_Endpoint_.22.2Fsites.22):''' This endpoint can be used to access all referenced sites via a single URI. It also provides services to retrieve meta data about referenced sites.
+  2. '''[SITE endpoint](RickRESTfullApi#SITE_Service_Endpoint_.22.2Fsite.2F.7BsiteID.7D.22):''' This endpoint allows to interact with a specific referenced site. Calls take advantage of local caches (if available)
+  3. '''[RICK endpoint](RickRESTfullApi#RICK_Endpoint_.28.22.2Fsymbol.22_and_.22.2Fmapping.22.29):''' This endpoint allows to work with the Entities managed by the RICK (called Symbols) and mappings of external Entities to Symbols. 
+
+## Web Interface of the RICK
+
+Not yet implemented :(
+
