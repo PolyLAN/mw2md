@@ -1,5 +1,7 @@
 MediaWiki to MarkDown syntax translation
 
+Copied from https://bitbucket.org/wikier/mw2md, setup.py was fixed
+
 Usage
 -----
 
