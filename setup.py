@@ -11,7 +11,7 @@ import sys
 _requires = ["creole", "html2text"]
 
 setup(
-      name = 'PyLDPath',
+      name = 'mw2md',
       version = '0.0.1',
       description = 'MediaWiki to MarkDown syntax translation',
       long_description = 'Simple library to translate between those common docuemntation syntaxes.',
