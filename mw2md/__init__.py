@@ -20,7 +20,7 @@ class MW2MD:
         print("Transforming MediWiki from '%s' to MarkDown syntax..." % self.orig)
         t1 = datetime.datetime.now()
         fin = open(self.orig, "r")
-        md = MW2MD.convert(unicode(fin.read(), 'utf-8', 'ignore'))
+        md = MW2MD.convert(unicode(fin.read(), 'utf-8', 'ignore')).encode('utf-8', 'ignore')
         fin.close()
         fout = open(self.dest, "w")
         fout.write(md)
@@ -34,7 +34,7 @@ class MW2MD:
     def convert(self, text):
         """Convert a mediawiki text to markdown"""
         document = Parser(text).parse()
-        html = HtmlEmitter(document).emit().encode('utf-8', 'ignore')
+        html = HtmlEmitter(document).emit()
         md = html2text(html)
 
         return md
