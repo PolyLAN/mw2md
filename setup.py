@@ -22,7 +22,7 @@ setup(
       platforms = ['any'], #Should be removed by PEP  314
       packages = ['mw2md'],
       requires = _requires, # Used by distutils to create metadata PKG-INFO
-      install_requires = _install_requires, #Used by setuptools to install the dependencies
+      install_requires = [], #Used by setuptools to install the dependencies
       classifiers =  [
         'Development Status :: 4 - Beta',
         'Intended Audience :: Developers',
