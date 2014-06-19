@@ -12,7 +12,7 @@ _requires = ["creole", "html2text"]
 
 setup(
       name = 'mw2md',
-      version = '0.0.1',
+      version = '0.0.2',
       description = 'MediaWiki to MarkDown syntax translation',
       long_description = 'Simple library to translate between those common docuemntation syntaxes.',
       license = 'Apache License, Version 2.0', #Should be removed by PEP  314

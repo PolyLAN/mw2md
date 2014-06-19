@@ -9,6 +9,7 @@ from creole.html_emitter import HtmlEmitter
 
 from html2text import html2text
 
+
 class MW2MD:
 
     def __init__(self, orig, dest):
@@ -19,17 +20,24 @@ class MW2MD:
         print("Transforming MediWiki from '%s' to MarkDown syntax..." % self.orig)
         t1 = datetime.datetime.now()
         fin = open(self.orig, "r")
-        document = Parser(unicode(fin.read(), 'utf-8', 'ignore')).parse()
+        md = MW2MD.convert(unicode(fin.read(), 'utf-8', 'ignore'))
         fin.close()
-        html = HtmlEmitter(document).emit().encode('utf-8', 'ignore')
-        md = html2text(html)
         fout = open(self.dest, "w")
         fout.write(md)
         fout.flush()
         fout.close()
         t2 = datetime.datetime.now()
         time = t2 - t1
-        print("MarkDown file saved at '%s' (time required: %s)! Please, check it." % (self.dest, time)) 
+        print("MarkDown file saved at '%s' (time required: %s)! Please, check it." % (self.dest, time))
+
+    @classmethod
+    def convert(self, text):
+        """Convert a mediawiki text to markdown"""
+        document = Parser(text).parse()
+        html = HtmlEmitter(document).emit().encode('utf-8', 'ignore')
+        md = html2text(html)
+
+        return md
 
     def __check_path(self, path):
         path = os.path.abspath(path)
@@ -37,7 +45,7 @@ class MW2MD:
             return path
         else:
             raise ValueError("Cannot access file at '%s'" % path)
- 
+
 if __name__=="__main__":
     if (len(sys.argv) == 1):
         print("Input file is required!\n")
